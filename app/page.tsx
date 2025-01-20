@@ -21,7 +21,7 @@ export default function Home() {
           href={`/docs${page_routes[0].href}`}
           className={buttonVariants({ className: "px-6", size: "lg" })}
         >
-          Documentation
+          Guidebook
         </Link>
         <Link
           href="/blog"
@@ -31,7 +31,7 @@ export default function Home() {
             size: "lg",
           })}
         >
-          Components
+          Recipes
         </Link>
       </div>
     </div>

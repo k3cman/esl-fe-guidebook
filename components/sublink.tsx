@@ -49,6 +49,7 @@ export default function SubLink({
     return <div className="flex flex-col">{titleOrLink}</div>;
   }
 
+  console.log(items)
   return (
     <div className="flex flex-col gap-1 w-full">
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
@@ -67,7 +68,7 @@ export default function SubLink({
         <CollapsibleContent>
           <div
             className={cn(
-              "flex flex-col items-start sm:text-sm dark:text-stone-300/85 text-stone-800 ml-0.5 mt-2.5 gap-3",
+              "flex flex-col items-start sm:text-sm dark:text-stone-300/85 text-stone-800 ml-0.5 mt-2.5 gap-3 pl-4 border-l ml-1.5",
               level > 0 && "pl-4 border-l ml-1.5"
             )}
           >
