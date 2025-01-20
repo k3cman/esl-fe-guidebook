@@ -47,10 +47,10 @@ export const ROUTES: EachRoute[] = [
         title: 'JavaScript',
         href: '/javascript'
       },
-      {
-        title: 'Typescript',
-        href: '/typescript'
-      },
+      // {
+      //   title: 'Typescript',
+      //   href: '/typescript'
+      // },
       {
         title: 'Browser Internals',
         href: '/browser-internals'
