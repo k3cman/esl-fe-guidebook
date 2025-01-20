@@ -1,7 +1,6 @@
 import { ModeToggle } from "@/components/theme-toggle";
-import { GithubIcon, TwitterIcon, CommandIcon } from "lucide-react";
+import { CommandIcon } from "lucide-react";
 import Link from "next/link";
-import { buttonVariants } from "./ui/button";
 import Search from "./search";
 import Anchor from "./anchor";
 import { SheetLeftbar } from "./leftbar";
