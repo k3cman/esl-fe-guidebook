@@ -50,31 +50,26 @@ export default async function BlogPage(props: PageProps) {
           variant: "link",
           className: "!mx-0 !px-0 mb-7 !-ml-1 ",
         })}
-        href="/blog"
+        href="/components"
       >
-        <ArrowLeftIcon className="w-4 h-4 mr-1.5" /> Back to blog
+        <ArrowLeftIcon className="w-4 h-4 mr-1.5" /> Back
       </Link>
       <div className="flex flex-col gap-3 pb-7 w-full mb-2">
-        <p className="text-muted-foreground text-sm">
-          {formatDate(res.frontmatter.date)}
-        </p>
+       
         <h1 className="sm:text-4xl text-3xl font-extrabold">
           {res.frontmatter.title}
         </h1>
-        <div className="mt-6 flex flex-col gap-3">
-          <p className="text-sm text-muted-foreground">Posted by</p>
-          <Authors authors={res.frontmatter.authors} />
-        </div>
+       
       </div>
       <div className="!w-full">
         <div className="w-full mb-7">
-          <Image
+          {/* <Image
             src={res.frontmatter.cover}
             alt="cover"
             width={700}
             height={400}
             className="w-full h-[400px] rounded-md border object-cover"
-          />
+          /> */}
         </div>
         <Typography>{res.content}</Typography>
       </div>

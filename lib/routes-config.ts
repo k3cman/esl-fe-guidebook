@@ -4,6 +4,7 @@ export type EachRoute = {
   title: string;
   href: string;
   noLink?: true; // noLink will create a route segment (section) but cannot be navigated
+  external?:  true,
   items?: EachRoute[];
 };
 
@@ -14,68 +15,50 @@ export const ROUTES: EachRoute[] = [
     noLink: true,
     items: [
       { title: "Introduction", href: "/introduction" },
-      // { title: "Quick Start Guide", href: "/quick-start-guide" },
-      // {
-      //   title: "Project Structure",
-      //   href: "/project-structure",
-      // },
-      // {
-      //   title: "Components",
-      //   href: "/components",
-      //   items: [
-      //     { title: "Stepper", href: "/stepper" },
-      //     { title: "Tabs", href: "/tabs" },
-      //     { title: "Note", href: "/note" },
-      //     { title: "Code Block", href: "/code-block" },
-      //     { title: "Image & Link", href: "/image-link" },
-      //     { title: "Custom", href: "/custom" },
-      //   ],
-      // },
-      // { title: "Themes", href: "/themes" },
-      // {
-      //   title: "Customize",
-      //   href: "/customize",
-      // },
-    ],
-  },
-  {
-    title: "Core concepts",
-    href: '/core-concepts',
-    noLink: true,
-    items:[
-      {
-        title: 'JavaScript',
-        href: '/javascript'
-      },
-      // {
-      //   title: 'Typescript',
-      //   href: '/typescript'
-      // },
-      {
-        title: 'Browser Internals',
-        href: '/browser-internals'
-      },
-      {
-        title: 'Web APIs',
-        href: '/web-apis'
-      },
-      {
-        title: 'Data structures',
-        href: '/data-structures'
-      },
-      {
-        title: 'UX, accessibility, i18n',
-        href: 'accessibility'
-      },
-      {
-        title: 'Security',
-        href: 'security'
-      },
-      {
-        title: 'Performance and Sustainability',
-        href: 'performance'
-      }
-    ]
+      { title: "Roadmaps", href: "/roadmaps",
+        noLink: true, 
+        items: [
+          {
+            title: "General",
+            href: '/general',
+            external: true
+          },
+          {
+            title: "Angular",
+            href: '/angular'
+          },
+          {
+            title: "Vue",
+            href: '/vue'
+          },
+          {
+            title: "React",
+            href: '/react'
+          },
+        ]
+       },
+      { title: "Resources", href: "/resources",
+        noLink: true,
+        items: [
+          {
+            title: "General",
+            href: '/general'
+          },
+          {
+            title: "Angular",
+            href: '/angular'
+          },
+          {
+            title: "Vue",
+            href: '/vue'
+          },
+          {
+            title: "React",
+            href: '/react'
+          },
+        ]
+       },
+      ],
   },
   {
     title: "Advanced concepts",
@@ -126,7 +109,7 @@ export const ROUTES: EachRoute[] = [
   },
   {
     title: 'Angular',
-    href: 'angular',
+    href: '/angular',
     noLink: true,
     items: [
       {
@@ -158,7 +141,7 @@ export const ROUTES: EachRoute[] = [
       },
       {
         title:'Data flow',
-        href: 'data-flow',
+        href: '/data-flow',
         noLink: true,
         items: [
           {
@@ -175,7 +158,7 @@ export const ROUTES: EachRoute[] = [
           },
           {
             title: 'Facade pattern',
-            href: 'facade-pattern'
+            href: '/facade-pattern'
           },
           {
             title: 'State management',

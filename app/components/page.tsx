@@ -42,26 +42,26 @@ function BlogCard({
 }: BlogMdxFrontmatter & { slug: string }) {
   return (
     <Link
-      href={`/blog/${slug}`}
-      className="flex flex-col gap-2 items-start border rounded-md py-5 px-3 min-h-[400px]"
+      href={`/components/${slug}`}
+      className="flex flex-col gap-2 items-start border rounded-md py-5 px-3"
     >
       <h3 className="text-md font-semibold -mt-1 pr-7">{title}</h3>
       <div className="w-full">
-        <Image
+        {/* <Image
           src={cover}
           alt={title}
           width={400}
           height={150}
           quality={80}
           className="w-full rounded-md object-cover h-[180px] border"
-        />
+        /> */}
       </div>
       <p className="text-sm text-muted-foreground">{description}</p>
       <div className="flex items-center justify-between w-full mt-auto">
-        <p className="text-[13px] text-muted-foreground">
+        {/* <p className="text-[13px] text-muted-foreground">
           Published on {formatDate2(date)}
-        </p>
-        <AvatarGroup users={authors} />
+        </p> */}
+        {/* <AvatarGroup users={authors} /> */}
       </div>
     </Link>
   );

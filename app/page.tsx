@@ -24,7 +24,7 @@ export default function Home() {
           Guidebook
         </Link>
         <Link
-          href="/blog"
+          href="/components"
           className={buttonVariants({
             variant: "secondary",
             className: "px-6",

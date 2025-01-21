@@ -1,0 +1,110 @@
+---
+title: "Facade pattern - Angular"
+description: "Explore how Facade pattern can help you organize your project data flow, and achieve better code organization, performance, and project structure"
+date: 02-09-2024
+---
+
+Implementing the Facade Pattern in Angular
+In Angular, we can implement the Facade pattern using services. Let's consider an example where we have a complex authentication system.
+
+Example: Authentication Facade
+Create the Services
+
+```typescript
+// auth.service.ts
+@Injectable({ providedIn: 'root' })
+export class AuthService {
+  login(credentials: any) { /* ... */ }
+  logout() { /* ... */ }
+}
+
+// user.service.ts
+@Injectable({ providedIn: 'root' })
+export class UserService {
+  getUser() { /* ... */ }
+}
+
+// token.service.ts
+@Injectable({ providedIn: 'root' })
+export class TokenService {
+  getToken() { /* ... */ }
+}
+Create the Facade Service
+
+// auth-facade.service.ts
+@Injectable({ providedIn: 'root' })
+export class AuthFacadeService {
+  constructor(
+    private authService: AuthService,
+    private userService: UserService,
+    private tokenService: TokenService
+  ) {}
+
+  login(credentials: any) {
+    return this.authService.login(credentials);
+  }
+
+  logout() {
+    return this.authService.logout();
+  }
+
+  getUser() {
+    return this.userService.getUser();
+  }
+
+  getToken() {
+    return this.tokenService.getToken();
+  }
+}
+```
+### Using the Facade Service with Async Pipe
+The async pipe in Angular allows you to subscribe to an Observable or Promise and return the latest value it has emitted. This is particularly useful when working with the Facade pattern.
+
+Example: Using Async Pipe with Facade Service
+Modify the Facade Service to Return Observables
+```typescript
+// auth-facade.service.ts
+@Injectable({ providedIn: 'root' })
+export class AuthFacadeService {
+  constructor(
+    private authService: AuthService,
+    private userService: UserService,
+    private tokenService: TokenService
+  ) {}
+
+  login(credentials: any): Observable<any> {
+    return this.authService.login(credentials);
+  }
+
+  logout(): Observable<void> {
+    return this.authService.logout();
+  }
+
+  getUser(): Observable<any> {
+    return this.userService.getUser();
+  }
+
+  getToken(): Observable<string> {
+    return this.tokenService.getToken();
+  }
+}
+```
+Use the Facade Service in a Component
+```typescript
+// app.component.ts
+@Component({
+  selector: 'app-root',
+  template: `
+    <div *ngIf="user$ | async as user">
+      Welcome, {{ user.name }}!
+    </div>
+  `
+})
+export class AppComponent {
+  user$: Observable<any>;
+
+  constructor(private authFacade: AuthFacadeService) {
+    this.user$ = this.authFacade.getUser();
+  }
+}
+```
