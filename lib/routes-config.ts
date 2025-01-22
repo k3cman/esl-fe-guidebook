@@ -114,28 +114,28 @@ export const ROUTES: EachRoute[] = [
     items: [
       {
         title: 'Core',
-        href: 'core',
+        href: '/core',
         noLink: true,
         items: [
           {
             title: 'RxJS / Reactive',
-            href: 'rxjs'
+            href: '/rxjs'
           },
           {
             title: 'Change detection',
-            href: 'change-detection'
+            href: '/change-detection'
           },
           {
             title: 'ZoneJS',
-            href: 'zonejs'
+            href: '/zonejs'
           },
           {
             title: 'Forms',
-            href: 'forms'
+            href: '/forms'
           },
           {
             title: 'Templates',
-            href: 'templates'
+            href: '/templates'
           },
         ]
       },
@@ -146,15 +146,15 @@ export const ROUTES: EachRoute[] = [
         items: [
           {
             title: 'Dependency Injection',
-            href: 'dependency-injection'
+            href: '/dependency-injection'
           },
           {
             title: 'Interceptors',
-            href: 'interceptors'
+            href: '/interceptors'
           },
           {
             title: 'Push architecture',
-            href: 'push-architecture'
+            href: '/push-architecture'
           },
           {
             title: 'Facade pattern',
@@ -162,7 +162,7 @@ export const ROUTES: EachRoute[] = [
           },
           {
             title: 'State management',
-            href: 'state-management'
+            href: '/state-management'
           },
         ]
       },
