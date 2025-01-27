@@ -62,9 +62,21 @@ export const ROUTES: EachRoute[] = [
   },
   {
     title: "Advanced concepts",
-    href: 'advanced-concepts',
+    href: '/advanced-concepts',
     noLink: true,
     items: [
+      {
+        title: 'Dependency Injection',
+        href: '/dependency-injection'
+      },
+      {
+        title: 'Singleton',
+        href: '/singleton'
+      },
+      {
+        title: 'Interceptors',
+        href: '/interceptors'
+      },
       {
         title: 'Microfrontends',
         href: 'microfrontends'
@@ -144,14 +156,7 @@ export const ROUTES: EachRoute[] = [
         href: '/data-flow',
         noLink: true,
         items: [
-          {
-            title: 'Dependency Injection',
-            href: '/dependency-injection'
-          },
-          {
-            title: 'Interceptors',
-            href: '/interceptors'
-          },
+          
           {
             title: 'Push architecture',
             href: '/push-architecture'

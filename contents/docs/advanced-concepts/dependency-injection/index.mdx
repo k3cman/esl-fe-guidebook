@@ -1,0 +1,79 @@
+---
+title: Dependency Injection
+description: 
+---
+Dependency Injection is a powerful design pattern that promotes loose coupling, improves testability, and enhances the flexibility of your code. By injecting dependencies rather than creating them within classes, you can create more modular and maintainable applications. This concept can be applied in any programming language, including JavaScript, to achieve better software design.
+
+### What is Dependency Injection?
+Dependency Injection (DI) is a design pattern used to achieve Inversion of Control (IoC) between classes and their dependencies. Instead of a class creating its own dependencies, they are provided (or injected) from an external source. This promotes loose coupling and enhances the modularity and testability of the code.
+
+### Key Concepts of Dependency Injection
+**Dependency**: An object that another object depends on. For example, a service that a component needs to function.
+
+**Injection**: The process of providing the dependencies to a class rather than the class creating them itself.
+
+**Inversion of Control (IoC)**: A principle where the control of object creation and binding is transferred from the class to an external entity.
+
+### Why Use Dependency Injection?
+**Loose Coupling**: DI reduces the dependencies between classes, making the code more modular and easier to maintain.
+
+**Improved Testability**: By injecting dependencies, you can easily replace them with mock objects during testing, leading to more isolated and reliable tests.
+
+**Flexibility**: DI allows you to change the implementation of dependencies without modifying the classes that use them, making the code more flexible and adaptable to changes.
+
+**Separation of Concerns**: DI promotes the separation of concerns by delegating the responsibility of managing dependencies to an external entity.
+
+###JavaScript Example of Dependency Injection
+Let's consider a simple example where we have a Logger service and a UserService that depends on the Logger service.
+
+Without Dependency Injection
+```javascript
+class Logger {
+  log(message) {
+    console.log(message);
+  }
+}
+
+class UserService {
+  constructor() {
+    this.logger = new Logger();
+  }
+
+  getUser() {
+    this.logger.log('Fetching user');
+    // Logic to fetch user
+  }
+}
+
+const userService = new UserService();
+userService.getUser();
+In this example, the UserService class creates its own instance of the Logger class. This creates a tight coupling between UserService and Logger, making it difficult to replace or mock the Logger during testing.
+```
+With Dependency Injection
+```javascript
+class Logger {
+  log(message) {
+    console.log(message);
+  }
+}
+
+class UserService {
+  constructor(logger) {
+    this.logger = logger;
+  }
+
+  getUser() {
+    this.logger.log('Fetching user');
+    // Logic to fetch user
+  }
+}
+
+// Creating an instance of Logger
+const logger = new Logger();
+
+// Injecting the Logger instance into UserService
+const userService = new UserService(logger);
+userService.getUser();
+```
+In this example, the UserService class receives an instance of the Logger class through its constructor. This decouples the UserService from the Logger, making it easier to replace or mock the Logger during testing.
+

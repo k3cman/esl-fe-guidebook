@@ -1,0 +1,82 @@
+---
+title: Singleton pattern
+---
+
+#### What is the Singleton Pattern?
+The Singleton pattern is a design pattern that ensures a class has only one instance and provides a global point of access to that instance. This pattern is useful when exactly one object is needed to coordinate actions across the system.
+
+#### Key Concepts of the Singleton Pattern
+
+1. **Single Instance**: The Singleton pattern ensures that a class has only one instance throughout the application's lifecycle.
+
+2. **Global Access**: The Singleton instance is globally accessible, meaning it can be accessed from anywhere in the application.
+
+3. **Lazy Initialization**: The Singleton instance is created only when it is needed for the first time, which can help in optimizing resource usage.
+
+### Why Use the Singleton Pattern?
+
+1. **Controlled Access**: The Singleton pattern provides controlled access to the single instance, ensuring that there are no multiple instances of the class.
+
+2. **Resource Management**: It helps in managing resources efficiently by ensuring that only one instance of the class is created, which can be particularly useful for managing shared resources like database connections or configuration settings.
+
+3. **Consistency**: The Singleton pattern ensures that there is a consistent state across the application since there is only one instance of the class.
+
+4. **Global State Management**: It can be used to manage global state or configuration settings that need to be accessed from multiple parts of the application.
+
+### JavaScript Example of the Singleton Pattern
+
+Let's consider a simple example where we have a `Logger` class that we want to ensure has only one instance.
+
+1. **Without Singleton Pattern**
+
+   ```javascript
+   class Logger {
+     log(message) {
+       console.log(message);
+     }
+   }
+
+   const logger1 = new Logger();
+   const logger2 = new Logger();
+
+   logger1.log('Logger 1');
+   logger2.log('Logger 2');
+
+   console.log(logger1 === logger2); // false
+   ```
+
+   In this example, we create two instances of the `Logger` class, which means they are not the same instance.
+
+2. **With Singleton Pattern**
+
+   ```javascript
+   class Logger {
+     constructor() {
+       if (Logger.instance) {
+         return Logger.instance;
+       }
+       Logger.instance = this;
+     }
+
+     log(message) {
+       console.log(message);
+     }
+   }
+
+   const logger1 = new Logger();
+   const logger2 = new Logger();
+
+   logger1.log('Logger 1');
+   logger2.log('Logger 2');
+
+   console.log(logger1 === logger2); // true
+   ```
+
+   In this example, the `Logger` class ensures that only one instance is created. If an instance already exists, it returns that instance instead of creating a new one. This way, `logger1` and `logger2` are the same instance.
+
+### Resources
+
+[https://refactoring.guru/design-patterns/singleton](Design pattern)
+[https://www.digitalocean.com/community/tutorials/java-singleton-design-pattern-best-practices-examples](Best practices)
+
+### Recipes

@@ -1,0 +1,243 @@
+---
+title: Singleton pattern with dependency injection in frontend
+description: Explore how these two patterns work together to improve projects
+date: 02-09-2024
+---
+
+## Definitions
+[Dependency Injection](/docs/advanced-concepts/dependency-injection)  
+[Singleton](/docs/advanced-concepts/singleton)
+
+## Why dependency injection with singletons
+
+Dependency injection in combination with singleton classes can bring great benefits to frontend projects. This powerful combination ensures that there is only one instance of a service or utility throughout the application, promoting consistency and efficient resource management. By injecting singletons, you achieve loose coupling between components and their dependencies, making the code more modular and easier to maintain. This approach also enhances testability, as you can easily mock dependencies during unit testing. Additionally, it simplifies the management of shared resources, such as configuration settings or logging services, by providing a centralized and globally accessible instance. Overall, using dependency injection with singleton classes leads to cleaner, more maintainable, and scalable frontend applications.
+In addition to that we are getting OOP principles, where we can optimize our applications with these approaches
+## Framework examples
+
+### Angular
+
+Angular has its own DI engine, and is designed to work with Signleton services that are injected into other classes for reusability of data.
+1. **Create the HTTP Service**
+
+   ```typescript
+   // http.service.ts
+   import { Injectable } from '@angular/core';
+   import { HttpClient } from '@angular/common/http';
+   import { Observable } from 'rxjs';
+
+   @Injectable({
+     providedIn: 'root' // This ensures the service is a singleton
+   })
+   export class HttpService {
+     private apiUrl = 'https://api.example.com';
+
+     constructor(private http: HttpClient) {}
+
+     getData(): Observable<any> {
+       return this.http.get(`${this.apiUrl}/data`);
+     }
+   }
+   ```
+
+   In this example, the `HttpService` is provided in the root injector, making it a singleton. This means there will be only one instance of this service throughout the application.
+
+2. **Inject the Singleton Service into a Component**
+
+   ```typescript
+   // app.component.ts
+   import { Component, OnInit } from '@angular/core';
+   import { HttpService } from './http.service';
+
+   @Component({
+     selector: 'app-root',
+     template: `
+       <div *ngIf="data">
+         <pre>{{ data | json }}</pre>
+       </div>
+     `
+   })
+   export class AppComponent implements OnInit {
+     data: any;
+
+     constructor(private httpService: HttpService) {}
+
+     ngOnInit() {
+       this.httpService.getData().subscribe(response => {
+         this.data = response;
+       });
+     }
+   }
+   ```
+
+   Here, the `HttpService` is injected into the `AppComponent` using Angular's Dependency Injection. The component uses the service to fetch data when it initializes.
+
+### VueJs
+Sure! Here's a small example of using Dependency Injection with a Singleton HTTP service in Vue.js, along with the benefits:
+
+1. **Create the HTTP Service**
+
+   ```javascript
+   // httpService.js
+   import axios from 'axios';
+
+   class HttpService {
+     constructor() {
+       if (HttpService.instance) {
+         return HttpService.instance;
+       }
+       this.apiUrl = 'https://api.example.com';
+       HttpService.instance = this;
+     }
+
+     getData() {
+       return axios.get(`${this.apiUrl}/data`);
+     }
+   }
+
+   const httpServiceInstance = new HttpService();
+   export default httpServiceInstance;
+   ```
+
+   In this example, the `HttpService` class ensures that only one instance is created. If an instance already exists, it returns that instance instead of creating a new one. We then export this single instance.
+
+2. **Provide the Singleton Service in the Vue Application**
+
+   ```javascript
+   // main.js
+   import Vue from 'vue';
+   import App from './App.vue';
+   import httpService from './httpService';
+
+   Vue.prototype.$httpService = httpService;
+
+   new Vue({
+     render: h => h(App),
+   }).$mount('#app');
+   ```
+
+   By adding the singleton instance to `Vue.prototype`, you make it available globally in your Vue application.
+
+3. **Use the Singleton Service in a Component**
+
+   ```javascript
+   <!-- App.vue -->
+   <template>
+     <div id="app">
+       <div v-if="data">
+         <pre>{{ data }}</pre>
+       </div>
+     </div>
+   </template>
+
+   <script>
+   export default {
+     name: 'App',
+     data() {
+       return {
+         data: null
+       };
+     },
+     created() {
+       this.$httpService.getData().then(response => {
+         this.data = response.data;
+       });
+     }
+   };
+   </script>
+   ```
+
+   In this example, the `App` component uses the singleton `HttpService` to fetch data when it is created.
+
+### React
+
+
+1. **Create the HTTP Service**
+
+   ```javascript
+   // httpService.js
+   import axios from 'axios';
+
+   class HttpService {
+     constructor() {
+       if (HttpService.instance) {
+         return HttpService.instance;
+       }
+       this.apiUrl = 'https://api.example.com';
+       HttpService.instance = this;
+     }
+
+     getData() {
+       return axios.get(`${this.apiUrl}/data`);
+     }
+   }
+
+   const httpServiceInstance = new HttpService();
+   export default httpServiceInstance;
+   ```
+
+   In this example, the `HttpService` class ensures that only one instance is created. If an instance already exists, it returns that instance instead of creating a new one. We then export this single instance.
+
+2. **Create a Context for the Singleton Service**
+
+   ```javascript
+   // HttpServiceContext.js
+   import React from 'react';
+   import httpService from './httpService';
+
+   const HttpServiceContext = React.createContext(httpService);
+
+   export default HttpServiceContext;
+   ```
+
+3. **Provide the Singleton Service in the React Application**
+
+   ```javascript
+   // App.js
+   import React from 'react';
+   import HttpServiceContext from './HttpServiceContext';
+   import ChildComponent from './ChildComponent';
+
+   function App() {
+     return (
+       <HttpServiceContext.Provider value={httpService}>
+         <ChildComponent />
+       </HttpServiceContext.Provider>
+     );
+   }
+
+   export default App;
+   ```
+
+4. **Consume the Singleton Service in a Child Component**
+
+   ```javascript
+   // ChildComponent.js
+   import React, { useContext, useEffect, useState } from 'react';
+   import HttpServiceContext from './HttpServiceContext';
+
+   function ChildComponent() {
+     const httpService = useContext(HttpServiceContext);
+     const [data, setData] = useState(null);
+
+     useEffect(() => {
+       httpService.getData().then(response => {
+         setData(response.data);
+       });
+     }, [httpService]);
+
+     return (
+       <div>
+         {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : 'Loading...'}
+       </div>
+     );
+   }
+
+   export default ChildComponent;
+   ```
+
+
+## Conclusion
+Even tho most of developers use Dependency Injection exlusevley in Angular as its part of its system, DI with Singletons can bring greater organization and performance in any frontend project.
+This way developers can create their own State management, Share data between components without them being directly linked in DOM and more.
+
+These two patterns are essentialy for proper structure and scalability of projects.
