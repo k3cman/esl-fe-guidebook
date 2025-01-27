@@ -4,7 +4,7 @@ export type EachRoute = {
   title: string;
   href: string;
   noLink?: true; // noLink will create a route segment (section) but cannot be navigated
-  external?:  true,
+  external?: true,
   items?: EachRoute[];
 };
 
@@ -15,8 +15,9 @@ export const ROUTES: EachRoute[] = [
     noLink: true,
     items: [
       { title: "Introduction", href: "/introduction" },
-      { title: "Roadmaps", href: "/roadmaps",
-        noLink: true, 
+      {
+        title: "Roadmaps", href: "/roadmaps",
+        noLink: true,
         items: [
           {
             title: "General",
@@ -36,8 +37,9 @@ export const ROUTES: EachRoute[] = [
             href: '/react'
           },
         ]
-       },
-      { title: "Resources", href: "/resources",
+      },
+      {
+        title: "Resources", href: "/resources",
         noLink: true,
         items: [
           {
@@ -57,8 +59,8 @@ export const ROUTES: EachRoute[] = [
             href: '/react'
           },
         ]
-       },
-      ],
+      },
+    ],
   },
   {
     title: "Advanced concepts",
@@ -152,11 +154,11 @@ export const ROUTES: EachRoute[] = [
         ]
       },
       {
-        title:'Data flow',
+        title: 'Data flow',
         href: '/data-flow',
         noLink: true,
         items: [
-          
+
           {
             title: 'Push architecture',
             href: '/push-architecture'
@@ -187,7 +189,7 @@ export const ROUTES: EachRoute[] = [
         title: 'Conclusion and best practices',
         href: 'best-practices'
       }
-      
+
     ]
   },
   {
@@ -266,7 +268,9 @@ export const ROUTES: EachRoute[] = [
         href: 'best-practices'
       }
     ]
-  }
+  },
+  { title: "Guidebook Roadmap", href: '/guidebook-roadmap' },
+  { title: "Contributing", href: '/contributing' }
 ];
 
 type Page = { title: string; href: string };

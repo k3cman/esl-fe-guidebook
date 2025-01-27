@@ -1,0 +1,24 @@
+---
+title: Contributing
+---
+
+### How to contirbute to the project
+Go to the repo of the project and clone to your machine.
+
+The app is build with NextJS and MDX, some basic knowledge of markdown is needed to write documents.
+
+The structure works in following way:
+Each page is markdown document and has its own folder, the routes are built using the folders. (markdown is in contents folder)
+The file placed in following manner ::root::/contents/docs/getting-started/introduction/index.mdx will result in route localhost:3000/docs/getting-started/introduction
+
+Inside of contents folder:
+Blog - keeps recipes
+Docs - keeps guidebook files
+
+After adding new document it needs to be added to routes-config.ts for guidebook documents, in order to have custom order of sidemenu links towards documents
+Recipes get shown by themselves, but will be changed in the future to have filters for frameworks, problems and other params.
+
+After completing new document or documents, contributor should submit a PR. Please do not push directly to main branch.
+
+### Installation
+Since this is nextjs template that gives us docs out of the box, npm install --force is required in order to install dependencies.
