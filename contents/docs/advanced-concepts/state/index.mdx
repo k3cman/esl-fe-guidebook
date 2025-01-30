@@ -1,0 +1,133 @@
+---
+title: State Pattern
+---
+#### What is the State Pattern?
+
+The State pattern is a design pattern that lets an object alter its behavior when its internal state changes. This pattern is useful when an object’s behavior depends on its state.
+
+![singleton.png](https://refactoring.guru/images/patterns/content/state/state-en.png)
+
+#### Key Concepts of the State Pattern
+
+1. **Context**: This is the class that contains the current state and delegates the behavior to the current state object.
+
+2. **State**: An interface or abstract class that defines the behavior associated with a particular state.
+
+3. **ConcreteState**: Concrete implementations of the State interface. Each ConcreteState class implements a specific behavior for the context when in that particular state.
+
+### Why Use the State Pattern?
+
+1. **Avoid Complex Conditional Statements**: State pattern helps eliminate complex code with massive conditionals that alter how the class behaves according to the current values of the class’s fields.
+
+2. **Enhance Code Readability and Maintainability**: State pattern keeps the behavior related to each state modular and isolated, making it easier to modify and extend.
+
+3. **Simplify State Transitions**: The State pattern makes it easy to manage transitions between states because each state knows how to transition to the next one.
+
+4. **Promote Extensibility**: The system can be easily extended with new state classes and ensure it properly handles transitions to/from other states, without modifying existing code.
+
+5. **Improve Flexibility**: The State pattern allows you to change the state dynamically at runtime.
+
+6. **Decouple State Management from Context**: The context (or main object) doesn't need to know the details of how a state works. It just interacts with the state interface.
+
+### JavaScript Example of the State Pattern
+
+1. **Without State Pattern**
+
+Let's consider a simple example where we have a `TrafficLight` class that should change state based on the currentState property.
+
+```javascript
+class TrafficLight {
+  constructor() {
+    this.currentState = 'RED'; // Initial state
+  }
+
+  change() {
+    if (this.currentState === 'RED') {
+      console.log('Red light! Now changing to green...');
+      this.currentState = 'GREEN'; // Change to Green
+    } else if (this.currentState === 'GREEN') {
+      console.log('Green light! Now changing to yellow...');
+      this.currentState = 'YELLOW'; // Change to Yellow
+    } else if (this.currentState === 'YELLOW') {
+      console.log('Yellow light! Now changing to red...');
+      this.currentState = 'RED'; // Change to Red
+    }
+  }
+}
+
+// Test the TrafficLight system
+const trafficLight = new TrafficLight();
+
+trafficLight.change();  // Red -> Green
+trafficLight.change();  // Green -> Yellow
+trafficLight.change();  // Yellow -> Red
+trafficLight.change();  // Red -> Green again
+```
+In this example, we have created a `TrafficLight` class with a property `currentState` and a method `change` that handles all possible state transfers. The problem is that in the future we might want `change` method to handle more states which can lead to increased code complexity and reduce code readability and maintainability.
+
+
+2. **With State Pattern**
+
+```javascript
+// Abstract State class
+class TrafficLightState {
+  changeState(trafficLight) {
+    throw new Error('This method should be overridden by subclasses');
+  }
+}
+
+// Concrete State: Red light
+class RedLight extends TrafficLightState {
+  changeState(trafficLight) {
+    console.log('Red light! Now changing to green...');
+    trafficLight.setState(new GreenLight());  // Transition to Green
+  }
+}
+
+// Concrete State: Green light
+class GreenLight extends TrafficLightState {
+  changeState(trafficLight) {
+    console.log('Green light! Now changing to yellow...');
+    trafficLight.setState(new YellowLight()); // Transition to Yellow
+  }
+}
+
+// Concrete State: Yellow light
+class YellowLight extends TrafficLightState {
+  changeState(trafficLight) {
+    console.log('Yellow light! Now changing to red...');
+    trafficLight.setState(new RedLight()); // Transition to Red
+  }
+}
+
+// Context: TrafficLight
+class TrafficLight {
+  constructor() {
+    this.state = new RedLight();  // Initial state
+  }
+
+  setState(state) {
+    this.state = state;
+  }
+
+  change() {
+    this.state.changeState(this);
+  }
+}
+
+// Test the TrafficLight context
+const trafficLight = new TrafficLight();
+
+trafficLight.change();  // Red -> Green
+trafficLight.change();  // Green -> Yellow
+trafficLight.change();  // Yellow -> Red
+trafficLight.change();  // Red -> Green again
+```
+
+In this example, we have created `TrafficLightState` class that holds `changeState` which will be used by all concrete state classes. All concrete state classes are extending TrafficLightState and have their own implementation of `changeState` method. Now TrafficLight class has a reference to the current state and `change` method only delegates the state change to the current state.
+
+### Resources
+
+[https://refactoring.guru/design-patterns/state] (Design pattern)
+
+### Recipes
