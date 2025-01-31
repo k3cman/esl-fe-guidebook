@@ -104,8 +104,8 @@ export const ROUTES: EachRoute[] = [
         href: 'ssr'
       },
       {
-        title: 'State management',
-        href: 'state-management'
+        title: 'State',
+        href: '/state'
       },
       {
         title: 'NPM and Libraries',
