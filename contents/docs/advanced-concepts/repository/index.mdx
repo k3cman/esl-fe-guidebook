@@ -1,0 +1,185 @@
+---
+title: Repository Pattern
+---
+
+#### What is the Repository Pattern?
+
+The Repository Pattern is a design pattern used in software development that provides a way to manage data access logic in a centralized location. It separates the logic that retrieves the data and maps it to the entity model from the business logic that operates on the model.
+
+![repository.png](/repository.jpg)
+
+#### Key Concepts of the Repository Pattern
+
+1. **Repository Interface**: Defines the operations that can be performed on the entity model. These operations typically include Create, Read, Update, and Delete (CRUD) operations.
+
+2. **Concrete Repository**: Implements the repository interface. It contains the actual logic for interacting with the data source.
+
+3. **Unit of Work (Optional)**: This is often used in conjunction with the repository pattern to manage transactions. It coordinates the writing of data and can commit or rollback changes.
+
+4. **Entity Models**: Represents the business entities of the application. It typically consists of one or more classes that map to database tables.
+
+### Why Use the Repository Pattern?
+
+1. **Separation of Concerns**: The repository abstracts the data access layer, which allows the application logic to focus on business operations without worrying about how data is fetched or stored.
+
+2. **Testability**: You can mock the repository in unit tests to isolate business logic without interacting with the actual database or external data sources.
+
+3. **Centralized Data Access Logic**: All database queries and interactions are handled in one place, which makes it easier to maintain and modify when needed.
+
+### JavaScript Example of the Repository Pattern
+Let's consider a simple example where we have a system that will perform basic CRUD operations on the `Product` entity.
+
+1. **Without Repository Pattern**
+
+```javascript
+
+// Product Entity
+class Product {
+  constructor(id, name, price) {
+    this.id = id;
+    this.name = name;
+    this.price = price;
+  }
+}
+
+// Product CRUD Operations
+class ProductService {
+  constructor() {
+    this.products = []; // In-memory storage for products
+  }
+
+  // Create: Add a new product
+  add(product) {
+    this.products.push(product);
+    console.log(`Product ${product.name} added successfully.`);
+  }
+
+  // Read: Get all products
+  getAll() {
+    return this.products;
+  }
+
+  // Read: Get a product by its ID
+  getById(id) {
+    return this.products.find(product => product.id === id);
+  }
+
+}
+
+// Using the ProductService
+
+// Create an instance of ProductService
+const productService = new ProductService();
+
+// Add some products
+productService.add(new Product(1, 'Apple iPhone 14', 999));
+productService.add(new Product(2, 'Samsung Galaxy S21', 799));
+
+// Get all products
+console.log("All products:", productService.getAll());
+
+// Get a product by ID
+console.log("Product by ID (1):", productService.getById(1));
+
+```
+In this example, all logic for performing CRUD operations is in ProductService. This implementation directly manipulates the data inside the ProductService class, without any abstraction like repositories. It’s simple and easy to understand but could become messy or harder to maintain as the project grows, especially with more complex data storage or requirements.
+
+2. **With Repository Pattern**
+
+```javascript
+// Product Entity
+class Product {
+  constructor(id, name, price) {
+    this.id = id;
+    this.name = name;
+    this.price = price;
+  }
+}
+
+// Repository Interface
+class ProductRepository {
+  // Abstract methods (to be implemented in concrete class)
+  add(product) {
+    throw new Error("Method 'add()' must be implemented.");
+  }
+
+  getById(id) {
+    throw new Error("Method 'getById()' must be implemented.");
+  }
+
+  getAll() {
+    throw new Error("Method 'getAll()' must be implemented.");
+  }
+}
+
+// Concrete Repository
+class InMemoryProductRepository extends ProductRepository {
+  constructor() {
+    super();
+    this.products = []; // In-memory data store
+  }
+
+  // Implementing the add method
+  add(product) {
+    this.products.push(product);
+  }
+
+  // Implementing the getById method
+  getById(id) {
+    return this.products.find(product => product.id === id);
+  }
+
+  // Implementing the getAll method
+  getAll() {
+    return this.products;
+  }
+}
+
+// Business Logic Using the Repository
+class ProductService {
+  constructor(productRepository) {
+    this.productRepository = productRepository;
+  }
+
+  // Add a new product
+  addProduct(product) {
+    this.productRepository.add(product);
+  }
+
+  // Get a product by ID
+  getProductById(id) {
+    return this.productRepository.getById(id);
+  }
+
+  // Get all products
+  getAllProducts() {
+    return this.productRepository.getAll();
+  }
+}
+
+// Using the Repository Pattern
+
+// Create a new instance of the InMemory repository
+const productRepository = new InMemoryProductRepository();
+
+// Create a product service that will interact with the repository
+const productService = new ProductService(productRepository);
+
+// Add some products
+productService.addProduct(new Product(1, "Apple iPhone 14", 999));
+productService.addProduct(new Product(2, "Samsung Galaxy S21", 799));
+
+// Retrieve products
+console.log("All products:", productService.getAllProducts());
+
+// Get product by ID
+const product = productService.getProductById(1);
+console.log("Product by ID (1):", product);
+```
+
+In this example, we used the Repository pattern to separate our business logic from data access logic. This made our code easier to maintain, improve, and refactor as our application grew.
+
+### Resources
+[https://www.linkedin.com/pulse/what-repository-pattern-alper-sara%C3%A7/] (Design pattern)
+
+### Recipes
