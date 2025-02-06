@@ -1,0 +1,159 @@
+---
+title: Facade Pattern
+---
+
+#### What is the Facade Pattern?
+The Facade pattern is a design pattern that provides a simplified interface to a complex subsystem. Instead of interacting with the various components of a subsystem directly, the facade pattern introduces a single unified interface to interact with.
+
+![facade.png](/facade.png)
+
+#### Key Concepts of the Facade Pattern
+
+1. **Facade**: Class that provides a simplified, unified interface to the subsystem(s). It delegates requests from the client to the appropriate subsystem(s) without the client needing to be aware of the underlying complexities.
+
+2. **Complex Subsystem**: Set of classes or components that perform specific tasks within a system.
+
+3. **Client**: Part of the system that interacts with the facade, rather than the individual components of the subsystem. The client doesn't need to understand the internal workings of the subsystem—just how to use the facade's simplified methods.
+
+### Why Use the Facade Pattern?
+
+1. **Simplified Interface**: Instead of dealing with multiple complex components and their interactions, the client interacts with a single, unified interface.
+
+2. **Reduced Complexity**: By hiding the complexity of the subsystem and providing a simple interface, the facade reduces the cognitive load on the client.
+
+3. **Decouples Clients from Subsystems**: Since the client interacts with the facade rather than directly with the subsystem, the client doesn't need to worry about the individual components or their relationships.
+
+### JavaScript Example of the Facade Pattern
+
+Let's consider an example where we have three subsystems: `Light`, `MusicSystem`, and `AirConditioner` which are classes representing different parts of a complex system.
+
+1. **Without Facade Pattern**
+
+```javascript
+// Subsystem 1: Light
+class Light {
+  turnOn() {
+    console.log("Light is turned on.");
+  }
+
+  turnOff() {
+    console.log("Light is turned off.");
+  }
+}
+
+// Subsystem 2: MusicSystem
+class MusicSystem {
+  start() {
+    console.log("Music system started.");
+  }
+
+  stop() {
+    console.log("Music system stopped.");
+  }
+}
+
+// Subsystem 3: AirConditioner
+class AirConditioner {
+  turnOn() {
+    console.log("Air Conditioner is turned on.");
+  }
+
+  turnOff() {
+    console.log("Air Conditioner is turned off.");
+  }
+}
+
+// Client Code
+const light = new Light();
+const musicSystem = new MusicSystem();
+const airConditioner = new AirConditioner();
+
+// Start Movie Night
+console.log("Starting Movie Night...");
+light.turnOff();
+musicSystem.stop();
+airConditioner.turnOn();
+
+// End Movie Night
+console.log("Ending Movie Night...");
+light.turnOn();
+musicSystem.start();
+airConditioner.turnOff();
+
+```
+In this example, client code interacts directly with the subsystems: It manually calls methods like `light.turnOff()`, `musicSystem.stop()`, and `airConditioner.turnOn()` to set things up for "Movie Night". To end "Movie Night", it manually restores the settings by calling the appropriate methods for each subsystem.
+
+2. **With Facade Pattern**
+
+```javascript
+// Subsystem 1
+class Light {
+  turnOn() {
+    console.log("Light is turned on.");
+  }
+
+  turnOff() {
+    console.log("Light is turned off.");
+  }
+}
+
+// Subsystem 2
+class MusicSystem {
+  start() {
+    console.log("Music system started.");
+  }
+
+  stop() {
+    console.log("Music system stopped.");
+  }
+}
+
+// Subsystem 3
+class AirConditioner {
+  turnOn() {
+    console.log("Air Conditioner is turned on.");
+  }
+
+  turnOff() {
+    console.log("Air Conditioner is turned off.");
+  }
+}
+
+// Facade Class
+class SmartHomeFacade {
+  constructor() {
+    this.light = new Light();
+    this.musicSystem = new MusicSystem();
+    this.airConditioner = new AirConditioner();
+  }
+
+  startMovieNight() {
+    console.log("Starting Movie Night...");
+    this.light.turnOff();
+    this.musicSystem.stop();
+    this.airConditioner.turnOn();
+  }
+
+  endMovieNight() {
+    console.log("Ending Movie Night...");
+    this.light.turnOn();
+    this.musicSystem.start();
+    this.airConditioner.turnOff();
+  }
+}
+
+// Client Code
+const homeFacade = new SmartHomeFacade();
+
+// Start movie night
+homeFacade.startMovieNight();
+// End movie night
+homeFacade.endMovieNight();
+
+   ```
+In this example, we have created `SmartHomeFacade ` class that wraps `Light`, `MusicSystem`, and `AirConditioner` subsystems and provides simplified methods like startMovieNight() and endMovieNight(), which coordinate the subsystems. The Client only interacts with the SmartHomeFacade and doesn't need to understand the internal workings of the subsystems.
+
+### Resources
+[https://refactoring.guru/design-patterns/facade] (Design pattern)
+
+### Recipes

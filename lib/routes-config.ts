@@ -76,6 +76,10 @@ export const ROUTES: EachRoute[] = [
         href: '/singleton'
       },
       {
+        title: 'Facade',
+        href: '/facade'
+      },
+      {
         title: 'Interceptors',
         href: '/interceptors'
       },
