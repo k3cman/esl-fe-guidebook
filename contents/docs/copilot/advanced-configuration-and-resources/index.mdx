@@ -1,0 +1,112 @@
+---
+title: Advanced Configuration and Resources
+description: Module 4 - configuring Copilot, ignore rules, workspace instructions, and MCPs
+---
+
+## 4.1. The Engine Under the Hood (A Brief Overview)
+
+GitHub Copilot is powered by large language models (LLMs) developed by OpenAI in collaboration with GitHub.
+
+What's important to understand is that the model's performance is tied to the context it receives. The principles you learned in Module 3—writing clear prompts and providing context with open tabs—are the most effective ways to get the best performance from the underlying engine.
+
+## 4.2. Configuration: Setting Up Your "Rules File"
+
+You can and should configure Copilot to ignore specific files or directories. This is critical for preventing it from accessing sensitive information, logs, or irrelevant build artifacts, which also helps improve the quality of its suggestions.
+
+Copilot automatically respects the patterns in your project's `.gitignore` file. For more specific control, you can configure this directly in your IDE's settings.
+
+Example: Configuring in VS Code
+
+You can tell Copilot to ignore certain files by adding them to the `copilot.ignore` setting in your `settings.json` file.
+
+Open your VS Code Settings (File > Preferences > Settings).
+
+Search for `copilot.ignore`.
+
+Click "Edit in settings.json".
+
+Add the paths you want to exclude.
+
+Example `settings.json` configuration:
+
+```json
+{
+  // ... your other settings
+  "copilot.ignore": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/.env",
+    "**/secrets.json",
+    "**/*.log"
+  ]
+}
+```
+
+This configuration prevents Copilot from ever reading or using the content of these files for context. We recommend all developers set up these basic ignore rules.
+
+## 4.3. Troubleshooting Common Issues
+
+If Copilot isn't behaving as expected, here are a few common solutions:
+
+Issue: Suggestions are not appearing.
+
+Solution 1: Check the Copilot icon in your editor's status bar. If it's disabled or has an error, click it for more information.
+
+Solution 2: Try logging out and back into your GitHub account via the editor.
+
+Solution 3: Ensure you don't have conflicting extensions that might be interfering with code completion.
+
+Issue: Copilot seems stuck or is giving repetitive, unhelpful answers.
+
+Solution: In Copilot Chat, you can reset the conversation by typing `/clear`. This starts a fresh session and can often resolve context issues.
+
+## 4.4. Giving Copilot Custom Instructions
+
+Beyond providing temporary context with open tabs, you can give Copilot persistent "rules" or instructions that it will follow for your entire workspace. This is incredibly powerful for ensuring that generated code adheres to our company's specific coding standards and best practices.
+
+These instructions are stored in your workspace settings and are automatically applied to your Copilot Chat conversations.
+
+How to Set It Up (in VS Code):
+
+1. Create a `.vscode` folder in the root of your project if it doesn't exist.
+2. Inside `.vscode`, create a `settings.json` file.
+3. Add the `github.copilot.chat.instructions` setting with your rules.
+
+By setting this up, you're giving Copilot a "cheat sheet" on how to code for your specific project, which will make its suggestions far more relevant and useful.
+
+For more detailed explanation on this visit `Copilot Instructions Namin Convention.docx`.
+
+```text
+// TODO Add example instructions
+```
+
+## 4.5. Introducing Model Context Protocols (MCPs)
+
+To get the best possible suggestions, you need to give Copilot the right context. A Model Context Protocol (MCP) is our company's term for a simple set of actions you take before asking Copilot for help.
+
+The goal is to load your IDE with the information Copilot needs to understand the task.
+
+MCP #1: The Open Tabs Protocol
+
+Before asking Copilot to create or modify code that interacts with other parts of the application, open the related files in adjacent tabs.
+
+Scenario: You need to add a new method to a controller that calls a service.
+
+Action: Before writing the prompt, make sure you have the Service interface file and the relevant Data Transfer Object (DTO) file open.
+
+Why it Works: Copilot actively scans your open tabs to gather context. This dramatically improves the accuracy of its suggestions, as it can see the exact method signatures and data structures it needs to use.
+
+## 4.6. Useful Links & Where to Get Help
+
+You're now ready to use Copilot in your daily work! Here are the resources you'll need going forward.
+
+Internal Resources:
+
+- `#copilot-users` Channel: [Link to your internal Slack or Teams channel]. This is the primary place to ask questions, share cool discoveries, and get help from your colleagues.
+- Internal Copilot "Cookbook": [Link to Confluence/SharePoint page for your cookbook]. As we develop best practices and MCPs for our specific stacks, they will be documented here.
+
+Official Documentation:
+
+- GitHub Copilot Documentation: https://docs.github.com/en/copilot
+- Copilot Chat in VS Code: https://code.visualstudio.com/docs/editor/github-copilot#_copilot-chat
+- Copilot in JetBrains IDEs: https://www.jetbrains.com/help/idea/github-copilot.html

@@ -2,3 +2,50 @@
 title: General Resources
 description: 
 ---
+
+This page collects useful resources for learning and using AI coding assistants—especially GitHub Copilot—across our frontend projects.
+
+## Official docs
+
+- GitHub Copilot — official documentation and getting started guides: https://docs.github.com/en/copilot
+- GitHub Copilot for Business — admin and licensing details: https://docs.github.com/en/copilot/organizations
+
+## Tutorials & Guides
+
+- "Getting started with GitHub Copilot" — step-by-step IDE setup and first prompts (official and community tutorials).
+- "Prompt engineering for developers" — short guides that explain how to craft effective prompts for code generation and tests.
+
+## Sample prompts (copy & adapt)
+
+- Generate a React component scaffold:
+
+```text
+Create a TypeScript React functional component named MyButton with props {label: string, onClick: () => void}. Include Tailwind classes for padding and rounded corners, and export as default. Add a short unit test using React Testing Library.
+```
+
+- Write a unit test for an Angular service:
+
+```text
+Write Jasmine unit tests for AuthService that mock HttpClient and verify login() handles success and error responses.
+```
+
+- Improve function performance with RxJS:
+
+```text
+Refactor the following RxJS pipeline to debounce input events, cancel previous requests, and share the result among subscribers. Explain each change.
+
+<PASTE CODE HERE>
+```
+
+## Security & policy
+
+- Internal security checklist — always follow company rules for secrets, data handling, and third-party code when using AI assistants.
+- Never include API keys, credentials, or proprietary code in prompts.
+
+## Where to contribute
+
+If you find helpful tutorials, prompt recipes, or examples, please contribute them to this repo under `contents/docs/ai/` or `contents/docs/getting-started/resources/` and open a PR referencing the relevant team.
+
+---
+
+If you want, I can add a dedicated `contents/docs/ai/prompts.mdx` with categorized prompts for React, Angular, Vue, testing, and documentation. Shall I create that file with 10 starter prompts?

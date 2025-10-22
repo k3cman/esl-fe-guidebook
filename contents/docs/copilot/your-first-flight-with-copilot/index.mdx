@@ -1,0 +1,99 @@
+---
+title: Your First Flight with Copilot
+description: Module 2 - how to interact with Copilot and a hands-on slugify tutorial
+---
+
+Now that you have Copilot installed and understand the basic guidelines, it's time to start using it. This module will show you the primary ways you'll interact with Copilot and walk you through a practical, hands-on exercise.
+
+## 2.1. The Three Main Ways to Use Copilot
+
+You'll interact with Copilot in three primary ways. Mastering the interplay between them is the key to becoming productive.
+
+1. Inline Suggestions (The "Classic" Copilot)
+
+This is the most common way you'll use Copilot. As you start typing code, Copilot will automatically suggest completions, from a single variable name to an entire function.
+
+How to use it: Just start writing code.
+
+To accept a suggestion: Press Tab.
+
+To see other suggestions: Use Alt + ] (or Option + ] on Mac) to cycle through alternatives.
+
+To dismiss a suggestion: Press Esc or simply keep typing.
+
+2. Copilot Chat (Your Conversational Partner)
+
+Copilot Chat is an interactive chat interface directly in your IDE. You can ask it to explain code, suggest refactors, write unit tests, or even answer general programming questions. It's incredibly powerful for understanding existing code or planning new features.
+
+How to use it: Open the Copilot Chat view in your IDE's sidebar.
+
+Key Feature - @workspace: You can ask questions about your entire project by typing `@workspace` followed by your query (e.g., `@workspace how does our authentication service work?`). This allows Copilot to use your entire codebase for context.
+
+3. Comment-to-Code (Giving Instructions in Plain English)
+
+You can write a descriptive comment of what you want to achieve, and Copilot will generate the code for you. This is excellent for complex logic or when you're working with an unfamiliar library.
+
+How to use it: Write a clear, detailed comment. For example:
+
+```js
+// function to fetch user data from /api/users/{id}
+// handle potential 404 and 500 errors
+```
+
+Copilot will then suggest the full function implementation below the comment.
+
+## 2.2. A Basic Tutorial: Building a Utility Function
+
+Let's build a simple utility function to see these methods in action. Create a new file (e.g., `utils.js` or `Utils.java`) to follow along.
+
+Step 1: Generate a function from a comment
+
+In your new file, write the following comment:
+
+```js
+// Create a function that takes a string and returns a slugified version.
+// A slug replaces spaces with hyphens and converts all characters to lowercase.
+// Example: "My First Post" becomes "my-first-post"
+```
+
+Wait a moment, and Copilot should suggest a complete function. Press Tab to accept it. It will look something like this:
+
+```js
+function slugify(text) {
+  return text.toString().toLowerCase()
+    .replace(/\s+/g, '-')        // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')   // Remove all non-word chars
+    .replace(/\-\-+/g, '-')     // Replace multiple - with single -
+    .replace(/^-+/, '')           // Trim - from start of text
+    .replace(/-+$/, '');          // Trim - from end of text
+}
+```
+
+Step 2: Add JSDoc using Copilot Chat
+
+Highlight the entire `slugify` function you just created.
+
+Open Copilot Chat.
+
+Type the prompt: `add JSDoc to the selected code`.
+
+Copilot will generate a complete JSDoc block for the function.
+
+Step 3: Write a unit test using Inline Suggestions
+
+Below your function, start typing a comment for a unit test:
+
+```js
+// test cases for the slugify function
+```
+
+Now, start writing your first test case. As you type, Copilot will likely suggest additional test cases for you, including edge cases.
+
+```js
+// Example:
+console.assert(slugify("My First Post") === "my-first-post");
+console.assert(slugify("  leading and trailing spaces  ") === "leading-and-trailing-spaces");
+// ... accept other suggestions from Copilot
+```
+
+You've now successfully used the three main interaction patterns with Copilot to create, document, and test a function. In the next module, we'll dive deeper into how to write effective prompts and use Copilot as a true collaborator.

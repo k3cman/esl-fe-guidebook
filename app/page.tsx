@@ -14,7 +14,7 @@ export default function Home() {
         <MoveUpRightIcon className="w-4 h-4 font-extrabold" />
       </Link> */}
       <h1 className="text-3xl font-bold mb-4 sm:text-6xl">
-        This is ESL GuideBook for Frontend Developers
+        This is ENG GuideBook for GithubCopilot usage
       </h1>
       <div className="flex flex-row items-center gap-5">
         <Link

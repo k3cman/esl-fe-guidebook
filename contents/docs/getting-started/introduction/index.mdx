@@ -3,25 +3,62 @@ title: Introduction
 description: 
 ---
 
-This guidebook is created for developers that already have basic knowledge of Frontend. It's containing advanced concepts and recipes, where each developer can fill in their technical knowledge gaps.
+This guidebook is re-purposed to help developers in our company use AI tools—primarily GitHub Copilot—effectively and responsibly during frontend development. It assumes you already know the basics of frontend engineering and focuses on practical workflows, prompts, and guardrails to improve productivity while reducing risk.
 
 ## What is this guide?
 
-To achieve high-quality frontend architecture and prevent technical debt, this guide was created to help you either set up a project from the start or improve an existing project by implementing best practices and approaches.
+AI coding assistants like GitHub Copilot are powerful productivity tools that suggest code, explain snippets, and accelerate repetitive work. This guide explains how to integrate Copilot into your daily frontend workflow, how to craft high-quality prompts, how to validate and audit generated code, and how to combine Copilot with existing company standards and best practices.
 
-This guide provides a set of guidelines aimed at establishing best practices for all frontend projects within the company, including Angular, Vue, and React. By following these guidelines, we aim to deliver high-quality solutions to our clients and equip developers with tools to work more efficiently with these frameworks. Additionally, this guide offers resources to help developers advance their technical knowledge and skills.
+The goal is to help teams adopt Copilot in a way that increases velocity without sacrificing code quality, security, or maintainability. We cover patterns for using Copilot with React, Angular, and Vue projects, sample prompts, review checklists, and links to internal learning resources.
 
 ## How to use
 
-The guidelines are primarily intended for developers who want to improve their existing applications or create new ones, as well as for those who want to learn and understand Angular, Vue, React, and general frontend development better.
+This guide is for frontend developers who want to make safe, effective use of AI assistants while building features, fixing bugs, writing tests, or creating documentation.
 
-We recommend that before you dive into exploring this guidebook, you should have already completed company provided Learning path provided in workday learning.
+Recommended starting steps:
 
-Additionaly in the roadmap section you can find checkbox document that you can use for self evaluation of knowledge. If you are not sure, or its hard for you to grasp some of the concepts, please first refresh you knowledge with provided resources.
+- Enable Copilot in your IDE and pair it with your normal workflow rather than using it as an autopilot—treat suggestions as draft code to review.
+- Learn a small set of high-value prompts (examples included later) and iterate on them to match our codebase style and patterns.
+- Always run generated code through the same build, lint, and test steps you use for handwritten code.
+- Use the review checklist (see Contributing and QA sections) to validate suggestions for correctness, security, copyright, and licensing concerns.
+
+If you’re new to Copilot, start by using it for small tasks: writing unit tests, generating component scaffolding, or suggesting documentation comments. As you gain confidence, incorporate it for more complex refactors, keeping the review steps in place.
+
+## Responsible usage and limitations
+
+Copilot is a productivity aid, not a replacement for developer judgement. Keep these constraints in mind:
+
+- Verify correctness: run tests and code reviews on every change that includes AI-generated code.
+- Be mindful of licensing: do not paste large blocks of third-party code into prompts. Prefer small, self-contained examples.
+- Security & secrets: never include secrets (API keys, credentials) in prompts. Review generated code for inadvertent exposures.
+- Bias and stylistic drift: generated code may not match team conventions—use linters, formatters, and shared patterns to align output.
 
 ## Contributing
 
-This guide is written in Markdown and its residing on [Github repository](https://github.com/k3cman/esl-fe-guidebook). 
-The app is built with Nextjs and MDX, you can clone the repo and submit a pull request in order to contribute to the guide.
+This guide lives in the same repository and is open for contributions. To propose changes:
 
-> Currently its needed to run npm install --force in order to install dependencies properly
+1. Fork or branch the repository and update the relevant MDX file(s).
+2. Include examples, prompt recipes, or tests that demonstrate the new guidance.
+3. Open a pull request and request at least one review from an engineer familiar with the target framework (React/Angular/Vue).
+
+The site is built with Next.js and MDX; cloning the repo, running the dev server locally, and previewing changes makes review faster. If you add examples that require new dependencies, include them in a short README entry and add tests where appropriate.
+
+> Tip: When adding prompt examples, include the exact prompt text plus the expected output or rationale for choosing that phrasing.
+
+## Quick getting-started checklist
+
+- Configure Copilot in your IDE and sign in with your company account.
+- Read the "Responsible usage" section and the internal security checklist.
+- Try the sample prompts in the examples folder and run the app's tests.
+
+## Resources
+
+- Official GitHub Copilot docs — for configuration and licensing.
+- Internal engineering learning path — recommended prerequisite reading.
+- Examples and prompt recipes in the contents/docs/ai folder (contributions welcome).
+
+> Note: If you run into package installation issues, prefer to investigate the root cause rather than forcing installs. If you must use a force flag, document why and open an issue so maintainers can address dependency problems.
+
+---
+
+If you'd like, I can also add a short examples page with starter prompts for React, Angular, and Vue components, plus unit-test prompts. Want me to create that as a new MDX under `contents/docs/ai/`?

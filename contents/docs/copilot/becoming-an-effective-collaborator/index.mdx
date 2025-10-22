@@ -1,0 +1,121 @@
+---
+title: Becoming an Effective Collaborator
+description: Module 3 - prompting, tool selection, and practical examples for using Copilot as a collaborator
+---
+
+Welcome to Module 3. You've learned the basics of installation and interaction, and now it's time to elevate your skills. This section is about turning Copilot from a simple autocompleter into a true development partner. The goal is to learn how to guide Copilot effectively to get the results you need, faster.
+
+## 3.1. The Art of Prompting: How to "Talk" to Copilot
+
+The quality of Copilot's output is directly proportional to the quality of your input. Vague prompts lead to generic or incorrect code. Clear, context-rich prompts lead to accurate, useful suggestions.
+
+Bad Prompt:
+
+```js
+// make a function
+```
+
+Good Prompt (in Copilot Chat or a comment):
+
+```js
+// Create an async function called 'fetchUserDetails' that accepts a 'userId'.
+// Use the built-in fetch API to make a GET request to '/api/v1/users/{userId}'.
+// It should handle JSON parsing and return the user object.
+// Include error handling for network failures and non-200 status codes, throwing a custom UserNotFoundError for a 404.
+```
+
+The good prompt is specific, outlines the technology to use (fetch), provides a clear API endpoint, and defines the expected error handling behavior.
+
+## 3.2. The Engine Under the Hood: Choosing Your Tool
+
+While you don't directly choose the underlying LLM (e.g., GPT-4), you can significantly influence the results by choosing the right way to interact with Copilot. Think of it as choosing the right tool for the job. For simple, in-context completions, the inline suggestions are often best. For complex questions, refactoring, or architectural planning, Copilot Chat and its specialized agents like `@workspace` are far more effective. Understanding which tool to use is key to mastering Copilot.
+
+For a deeper dive into the models and when to use specific agents, please see our detailed document: `Github Copilot Models & Usege.docx`.
+
+## 3.4. Using Copilot as a Thought Partner
+
+Copilot Chat is exceptionally powerful for high-level planning and problem-solving.
+
+### Architectural Planning
+
+You can ask Copilot for structural advice based on our existing patterns.
+
+Prompt Example:
+
+```text
+@workspace Suggest a structure for a new React component that fetches and displays user data from our useUserData hook. It should include loading and error states, and use our <Spinner /> and <ErrorDisplay /> components from the internal UI library.
+```
+
+### Problem Solving & Decomposition
+
+Use Copilot to break down a complex task into manageable steps before you start coding.
+
+Prompt Example:
+
+```text
+I need to add a new 'lastLogin' field to our User API. Let's outline the required changes. Where would I need to make modifications in the database schema, repository layer, service layer, and controller?
+```
+
+## 3.5. The Philosophy: When to Use Copilot vs. When to Code Manually
+
+Copilot is a tool, and like any tool, it has tasks it excels at and tasks where it should be used with caution.
+
+Good candidates for Copilot:
+
+- Boilerplate Code: Writing constructors, getters/setters, or setting up new components/classes.
+- Unit Tests: Generating test cases, especially for pure functions.
+- Learning a New API: Exploring a new library or framework by asking Copilot for examples.
+- Repetitive Logic: Implementing algorithms or data transformations where the pattern is clear.
+- Documentation: Generating comments and formal documentation (like JSDoc).
+
+Code Manually or with Extreme Caution:
+
+- Complex Business Logic: The core, unique logic that defines your application's behavior requires your full attention and critical thinking.
+- Security-Sensitive Code: Anything related to authentication, authorization, or data encryption should be written and reviewed meticulously by a human.
+- Performance-Critical Code: While Copilot can suggest efficient code, it doesn't have the context to optimize for a specific high-load scenario.
+
+When You Don't Understand the Goal: If you can't clearly articulate what you need in a prompt, you're not ready to have an AI write the code for you.
+
+## 3.6. Showcase of Common Tasks at [Your Company Name]
+
+Here are some examples of how you can apply these concepts to our daily work.
+
+1. Creating Unit Tests for a Service
+
+Action: Open your service file (e.g., `UserService.ts`). Open Copilot Chat.
+
+Prompt:
+
+```text
+@workspace write Jest unit tests for the 'getUserById' method in the open file. Mock the repository dependency.
+```
+
+2. Generating Documentation
+
+Action: Highlight a function in your code.
+
+Prompt in Chat:
+
+```text
+Explain this code or Add JSDoc documentation for the selected code.
+```
+
+3. Refactoring Code to Meet Style Guides
+
+Action: Highlight a block of code that uses an older pattern.
+
+Prompt in Chat:
+
+```text
+Refactor this .then() chain to use async/await.
+```
+
+4. Explaining a Legacy Service
+
+Action: Open a file from a legacy part of the codebase.
+
+Prompt in Chat:
+
+```text
+@workspace explain how this service works. What are its primary responsibilities and dependencies?
+```
